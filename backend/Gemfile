@@ -8,6 +8,7 @@ gem 'pg'
 # Makes JSONApi-compliance stupid-easy.
 # See https://github.com/cerebris/peeps for an example.
 gem 'jsonapi-resources'
+gem 'rails-api'
 
 gem 'annotate', '~> 2.6.6'
 
