@@ -49,7 +49,7 @@
           [
             "reactify",
             {
-                "es6": true
+                "es6": false
             }
           ]
       ]

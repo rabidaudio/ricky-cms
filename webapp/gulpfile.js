@@ -4,7 +4,6 @@ var gulp = require('gulp');
 var del = require('del');
 
 
-
 // Load plugins
 var $ = require('gulp-load-plugins')();
 var browserify = require('browserify');
@@ -163,8 +162,15 @@ gulp.task('extras', function() {
         .pipe($.size());
 });
 
+gulp.task('backend', function() {
+    return require('child_process').spawn('bin/rails', ['server', '--port=5000'],{
+        cwd: require('path').resolve('..', 'backend'),
+        stdio: 'inherit'
+    });
+});
+
 // Watch
-gulp.task('watch', ['html', 'fonts', 'bundle'], function() {
+gulp.task('watch', ['html', 'fonts', 'backend', 'bundle'], function() {
 
     browserSync({
         notify: false,
