@@ -7,7 +7,10 @@ Rails.application.configure do
   config.cache_classes = false
 
   # Do not eager load code on boot.
-  config.eager_load = false
+  # config.eager_load = false
+
+  # Eager load code on boot so JSONAPI-Resources resources are loaded and processed globally
+  config.eager_load = true
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
