@@ -20,17 +20,20 @@ var development = (process.env['NODE_ENV'] !== 'production'); // set this env va
 var paths = {
   out_path: 'dist',
   styles: {
-    src: 'styles/main.scss',
+    main: 'styles/main.scss',
+    all: 'styles/**/*.scss',
     dest: 'dist/css/'
   },
   scripts:{
-    src: 'main.coffee',
+    main: 'scripts/main.coffee',
+    all: ['scripts/**/*.coffee', 'scripts/**/*.js'],
     dest: 'dist/js/'
   },
   pages:{
-    src: 'index.jade',
+    main: 'index.jade',
     dest: 'dist/',
-    all: ['dist/*.html', 'dist/!(vendor)/**/*.html']
+    all: 'index.jade',
+    destclean: ['dist/*.html', 'dist/!(vendor)/**/*.html']
   },
   bower:{
     src: 'bower_components/**/*',
@@ -46,7 +49,7 @@ gulp.task('clean:styles', function(cb) {
   del(paths.styles.dest, cb);
 });
 gulp.task('clean:pages', function(cb) {
-  del(paths.pages.all, cb);
+  del(paths.pages.destclean, cb);
 });
 gulp.task('clean:bower', function(cb) {
   del(paths.bower.dest, cb);
@@ -60,7 +63,7 @@ gulp.task('clean:all', function(cb) {
 /********** BUILD **********/
 gulp.task('scripts', ['clean:scripts'], function () {
   var b = browserify({
-    entries: './'+paths.scripts.src,
+    entries: './'+paths.scripts.main,
     debug: development,
     // defining transforms here will avoid crashing your stream
     transform: [coffeeify],
@@ -77,7 +80,7 @@ gulp.task('scripts', ['clean:scripts'], function () {
     .pipe(gulp.dest(paths.scripts.dest));
 });
 gulp.task('styles', ['clean:styles'], function () {
-    gulp.src(paths.styles.src)
+    gulp.src(paths.styles.main)
       .pipe(gulpif(development, sourcemaps.init())) //sourcemaps only if in development mode
       .pipe(sass()) //compile sass
       .pipe(autoprefixer()) //add vendor prefixes
@@ -86,7 +89,7 @@ gulp.task('styles', ['clean:styles'], function () {
 });
 
 gulp.task('pages', ['clean:pages'], function (){
-  gulp.src(paths.pages.src)
+  gulp.src(paths.pages.main)
     .pipe(jade())
     .pipe(gulp.dest(paths.pages.dest));
 });
@@ -100,7 +103,7 @@ var resources = ['pages', 'scripts', 'styles', 'bower'];
 
 gulp.task('watch', function () {
   resources.forEach(function(r){
-    gulp.watch(paths[r].src, [r]); //e.g. gulp.watch(paths.scripts.src, ['scripts']);
+    gulp.watch(paths[r].all, [r]); //e.g. gulp.watch(paths.scripts.src, ['scripts']);
   });
 });
 

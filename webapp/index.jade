@@ -2,11 +2,12 @@ doctype html
 html(lang="en")
   head
     title= pageTitle
-    script(src="bower_components/webcomponentsjs/webcomponents.js")
-    link(rel="import" href="bower_components/voice-elements/dist/voice-player.html")
-    //- link(rel="import" href="bower_components/voice-elements/dist/voice-recognition.html")
+    script(src="vendor/webcomponentsjs/webcomponents.js")
+    script(src="vendor/jquery/dist/jquery.min.js")
+    link(rel="import" href="vendor/voice-elements/dist/voice-player.html")
+    //- link(rel="import" href="vendor/voice-elements/dist/voice-recognition.html")
     script(src="js/app.js")
     link(rel='stylesheet' href="css/main.css")
   body
     h1 Hello
-    .app
+    #app
