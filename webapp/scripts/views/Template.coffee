@@ -18,7 +18,7 @@ module.exports = class TemplateView extends Backbone.View
 
   render: =>
     # Backbone LocalStorage bug - https://github.com/tastejs/todomvc/issues/469
-    return if @model?.changed.id?
+    # return if @model?.changed.id?
 
     @$el.html @template @model?.toJSON() or @data
     console.log 'rendered!'
