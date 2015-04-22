@@ -10,7 +10,6 @@ module.exports = class HelloWorldButtonView extends Backbone.View
 
   render: =>
     @$el.html @template(@model.attributes)
-    #this.sidebar = new App.SidebarView({ el: this.$(".sidebar") });
     @playback = new HelloWorldView { parent: @$('.playback-container'), attributes: @model.attributes }
     return @
 

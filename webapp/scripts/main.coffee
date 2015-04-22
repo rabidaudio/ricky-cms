@@ -1,5 +1,5 @@
 Backbone = require 'backbone'
-$ = window.jQuery #window.Zepto
+$ = window.jQuery
 Backbone.$ = $
 
 HelloWorldButtonView = require './views/HelloWorldButton'

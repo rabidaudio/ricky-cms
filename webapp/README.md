@@ -11,7 +11,7 @@ Here's a decent little setup for a frontend framework.
 - All compiled together with browserify, making the scripts super elegant
 
 
-    browserify -t coffeeify --extension=".coffee" -t hbsify --extension=".hbs" scripts/main.coffee
+    browserify -t coffeeify --extension=".coffee" -t hbsfy --extension=".hbs" scripts/main.coffee
 
     gulp #build, serve, watch
     gulp clean:all
