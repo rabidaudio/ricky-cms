@@ -1,9 +1,8 @@
-
 Backbone = require 'backbone'
-$ = window.jQuery
+$ = window.jQuery #window.Zepto
 Backbone.$ = $
 
-HelloWorldView = require './views/HelloWorld'
+HelloWorldButtonView = require './views/HelloWorldButton'
 
 
 $(document).ready ->
@@ -11,6 +10,5 @@ $(document).ready ->
   talkers = new Backbone.Collection [ {text: 'just ship it'}, {text: 'hello bob'}, {text: 'kittens meow'} ]
 
   talkers.forEach (e,i,a) ->
-    t= new HelloWorldView e
-    $('#app').append t.el
-    t.speak()
+    $('#app').append "<div id='hw-#{i}'></div>"
+    t = new HelloWorldButtonView {model: e, el: "#hw-#{i}" }

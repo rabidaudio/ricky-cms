@@ -25,6 +25,7 @@
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.4",
     "handlebars": "^3.0.2",
+    "hbsfy": "^2.2.1",
     "jade": "^1.9.2",
     "mocha": "^2.2.4",
     "swank": "^1.1.2",

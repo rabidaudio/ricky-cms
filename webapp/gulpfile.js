@@ -10,6 +10,7 @@ var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var browserify = require('browserify');
 var coffeeify = require('coffeeify');
+var hbsfy = require('hbsfy');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
@@ -26,7 +27,7 @@ var paths = {
   },
   scripts:{
     main: 'scripts/main.coffee',
-    all: ['scripts/**/*.coffee', 'scripts/**/*.js'],
+    all: ['scripts/**/*.coffee', 'scripts/**/*.hbs', 'scripts/**/*.js'],
     dest: 'dist/js/'
   },
   pages:{
@@ -66,17 +67,17 @@ gulp.task('scripts', ['clean:scripts'], function () {
     entries: './'+paths.scripts.main,
     debug: development,
     // defining transforms here will avoid crashing your stream
-    transform: [coffeeify],
-    extensions: ['.coffee']
+    transform: [coffeeify, hbsfy],
+    extensions: ['.coffee', '.hbs']
   });
   return b.bundle()
     .pipe(source('app.js'))
     .pipe(buffer())
-    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(gulpif(development, sourcemaps.init({loadMaps: true})))
     // Add transformation tasks to the pipeline here.
-    .pipe(uglify())
+    .pipe(gulpif(!development, uglify()))
     .on('error', gutil.log)
-    .pipe(sourcemaps.write('./'))
+    .pipe(gulpif(development, sourcemaps.write('./')))
     .pipe(gulp.dest(paths.scripts.dest));
 });
 gulp.task('styles', ['clean:styles'], function () {
