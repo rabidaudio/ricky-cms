@@ -14,6 +14,10 @@ var hbsfy = require('hbsfy');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
+var mocha = require('gulp-mocha');
+var mochaPhantomJS = require('gulp-mocha-phantomjs');
+
+require('coffee-script/register')
 
 var development = (process.env['NODE_ENV'] !== 'production'); // set this env var in prod
 
@@ -80,6 +84,7 @@ gulp.task('scripts', ['clean:scripts'], function () {
     .pipe(gulpif(development, sourcemaps.write('./')))
     .pipe(gulp.dest(paths.scripts.dest));
 });
+
 gulp.task('styles', ['clean:styles'], function () {
     gulp.src(paths.styles.main)
       .pipe(gulpif(development, sourcemaps.init())) //sourcemaps only if in development mode
@@ -98,6 +103,21 @@ gulp.task('pages', ['clean:pages'], function (){
 gulp.task('bower', ['clean:bower'], function (){
   gulp.src(paths.bower.src).pipe(gulp.dest(paths.bower.dest)); //copy all
 });
+
+/********* TEST **********/
+gulp.task('test:unit', function (){
+  gulp.src(['test/unit/**/*.js', 'test/unit/**/*.coffee'], { read: false })
+    .pipe(mocha({
+      reporter: 'dot',
+    }));
+});
+
+gulp.task('test:integration', function (){
+  gulp.src('test/integration.html')
+    .pipe(mochaPhantomJS({reporter: 'dot'}));
+});
+
+gulp.task('test', ['test:unit', 'test:integration']);
 
 /********** RUN **********/
 var resources = ['pages', 'scripts', 'styles', 'bower'];
