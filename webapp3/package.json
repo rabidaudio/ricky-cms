@@ -1,0 +1,31 @@
+{
+  "name": "webapp3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.coffee",
+  "scripts": {
+    "test": "node_modules/.bin/mocha test"
+  },
+  "author": "Charles Julian Knight, charles@rabidaudio.com",
+  "license": "GPL",
+  "dependencies": {
+    "backbone": "^1.1.2",
+    "bower": "^1.4.1",
+    "chai": "^2.2.0",
+    "gulp": "^3.8.11",
+    "handlebars": "^3.0.2",
+    "jade": "^1.9.2",
+    "mocha": "^2.2.4"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rabidaudio/ricky-cms"
+  },
+  "bugs": {
+    "url": "https://github.com/rabidaudio/ricky-cms/issues"
+  },
+  "homepage": "https://github.com/rabidaudio/ricky-cms"
+}
