@@ -1,14 +1,12 @@
 Backbone = require 'backbone'
 $ = window.jQuery
 Backbone.$ = $
+require('backbone-jsonapi')(Backbone, require 'underscore') #gives good parse methods
 
-HelloWorldButtonView = require './views/HelloWorldButton'
-
+Router = require './router'
 
 $(document).ready ->
 
-  talkers = new Backbone.Collection [ {text: 'just ship it'}, {text: 'hello bob'}, {text: 'kittens meow'} ]
+  router = new Router
 
-  talkers.forEach (e,i,a) ->
-    $('#app').append "<div id='hw-#{i}'></div>"
-    t = new HelloWorldButtonView {model: e, el: "#hw-#{i}" }
+  router.navigate('404', {trigger: true, replace: false}) unless Backbone.history.start({pushState: false})

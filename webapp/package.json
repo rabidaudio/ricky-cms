@@ -1,8 +1,8 @@
 {
-  "name": "webapp3",
+  "name": "webapp",
   "version": "1.0.0",
   "description": "",
-  "main": "main.coffee",
+  "main": "scripts/main.coffee",
   "scripts": {
     "test": "node_modules/.bin/mocha test"
   },
@@ -29,11 +29,9 @@
     "jade": "^1.9.2",
     "mocha": "^2.2.4",
     "swank": "^1.1.2",
+    "underscore": "^1.8.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
-  },
-  "devDependencies": {
-    "mocha": "^2.2.4"
   },
   "repository": {
     "type": "git",
