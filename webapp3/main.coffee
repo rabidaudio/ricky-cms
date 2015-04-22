@@ -1,16 +1,12 @@
 
 Backbone = require 'backbone'
 
-HelloWorldView = require './view/HelloWorldView'
+HelloWorldView = require './views/HelloWorld'
 
 
-talkers = new Backbone.Collection [
-  'ohai',
-  'hello world',
-  'kittens meow'
-]
+talkers = new Backbone.Collection [ 'ohai', 'hello world', 'kittens meow' ]
 
-talkers.forEach (e,i,a)->
+talkers.forEach (e,i,a) ->
   t = new HelloWorldView text: e
   $('.app').append t
   t.speak()
